@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<title> Plots </title>
+<container>
+    <div>
+      <canvas id="plot1" width="400" height="200" style="border:1px solid #000000;"></canvas>
+      <h3 style="position: absolute; top:18px; left:450px"><u> Plot 1 History:</u></h3>
+    </div>
+    <div>
+      <canvas id="plot2" width="400" height="200" style="border:1px solid #000000;"></canvas>
+      <h3 style="position: absolute; top:220px; left:450px"><u> Plot 2 History:</u></h3>
+    </div>
+    <div>
+      <canvas id="plot3" width="400" height="200" style="border:1px solid #000000;"></canvas>
+      <h3 style="position: absolute; top:420px; left:450px"><u> Plot 3 History:</u></h3>
+    </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <!-- Include all compiled plugins (below), or include individual files as needed -->
+   <script src="js/bootstrap.min.js"></script>
+   <script>
+   var c = document.getElementById("plot1");
+   var ctx = c.getContext("2d");
+   ctx.font = "30px Arial";
+   ctx.fillText("Current: ",10,50);
+
+   var c = document.getElementById("plot2");
+   var ctx = c.getContext("2d");
+   ctx.font = "30px Arial";
+   ctx.fillText("Current: ",10,50);
+
+   var c = document.getElementById("plot3");
+   var ctx = c.getContext("2d");
+   ctx.font = "30px Arial";
+   ctx.fillText("Current: ",10,50);
+
+   </script>
+ </body>
+</html>
