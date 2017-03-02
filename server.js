@@ -11,13 +11,18 @@ app.get('/', (req, res) => {
   console.log('got a GET request');
 }); //get request to / is given to responder function
 
+app.get('/about.html', (req, res) => {
+  res.sendFile(__dirname + '/about.html');
+  console.log('got a GET request');
+});
+
 app.get('/img/:img_path', (req, res) => {
   res.sendFile(__dirname + '/img/:img_path');
   console.log('got a GET request for img');
 });
 
 function portListener(){
-  console.log('Listning on localhoset ' + port);
+  console.log('Listening on localhost ' + port);
 };
 
 var port = process.env.PORT || 3000;
