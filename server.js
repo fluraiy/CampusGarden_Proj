@@ -16,6 +16,26 @@ app.get('/about.html', (req, res) => {
   console.log('got a GET request');
 });
 
+app.get('/volunteer.html', (req, res) => {
+  res.sendFile(__dirname + '/volunteer.html');
+  console.log('got a GET request');
+});
+
+app.get('/stats.html', (req, res) => {
+  res.sendFile(__dirname + '/stats.html');
+  console.log('got a GET request');
+});
+
+app.get('/location.html', (req, res) => {
+  res.sendFile(__dirname + '/location.html');
+  console.log('got a GET request');
+});
+
+app.get('/contact.html', (req, res) => {
+  res.sendFile(__dirname + '/contact.html');
+  console.log('got a GET request');
+});
+
 app.get('/img/:img_path', (req, res) => {
   res.sendFile(__dirname + '/img/:img_path');
   console.log('got a GET request for img');
