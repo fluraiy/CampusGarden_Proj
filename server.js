@@ -7,13 +7,18 @@ var http = httpModule.Server(app);
 app.use(express.static('assets')); //any assets will be found in the folder assets (pics and such)
 
 app.configure(function(){
-    app.use(express.static(__dirname + '/img/'));
+    app.use(express.static(__dirname + '/img'));
 });
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
   console.log('got a GET request');
 }); //get request to / is given to responder function
+
+app.get('/index.html', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+  console.log('got a GET request');
+});
 
 app.get('/about.html', (req, res) => {
   res.sendFile(__dirname + '/about.html');
