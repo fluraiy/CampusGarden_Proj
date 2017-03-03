@@ -6,13 +6,22 @@ var http = httpModule.Server(app);
 
 app.use(express.static('assets')); //any assets will be found in the folder assets (pics and such)
 
+app.configure(function(){
+    app.use(express.static(__dirname + '/img'));
+});
+
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
   console.log('got a GET request');
 }); //get request to / is given to responder function
 
+app.get('/about.html', (req, res) => {
+  res.sendFile(__dirname + '/about.html');
+  console.log('got a GET request');
+});
+
 function portListener(){
-  console.log('Listning on localhoset ' + port);
+  console.log('Listening on localhost ' + port);
 };
 
 var port = process.env.PORT || 3000;
