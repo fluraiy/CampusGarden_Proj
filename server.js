@@ -6,12 +6,10 @@ var http = httpModule.Server(app);
 
 app.use(express.static('assets')); //any assets will be found in the folder assets (pics and such)
 
-function responder(req, res){
-  res.sendFile(__dirname + '/index.html'); //sending a file to the user's browser
-  console.log('got a request'); //print message in the server side console
-};
-
-app.get('/', responder); //get request to / is given to responder function
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+  console.log('got a GET request');
+}); //get request to / is given to responder function
 
 function portListener(){
   console.log('Listning on localhoset ' + port);
