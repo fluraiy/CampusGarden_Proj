@@ -15,11 +15,6 @@ app.get('/', (req, res) => {
   console.log('got a GET request');
 }); //get request to / is given to responder function
 
-app.get('/about.html', (req, res) => {
-  res.sendFile(__dirname + '/about.html');
-  console.log('got a GET request');
-});
-
 function portListener(){
   console.log('Listening on localhost ' + port);
 };
