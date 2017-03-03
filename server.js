@@ -15,11 +15,6 @@ app.get('/', (req, res) => {
   console.log('got a GET request');
 }); //get request to / is given to responder function
 
-app.get('/index.html', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-  console.log('got a GET request');
-});
-
 app.get('/about.html', (req, res) => {
   res.sendFile(__dirname + '/about.html');
   console.log('got a GET request');
