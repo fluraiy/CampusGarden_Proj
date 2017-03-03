@@ -20,11 +20,6 @@ app.get('/about.html', (req, res) => {
   console.log('got a GET request');
 });
 
-app.get('/img/:img_path', (req, res) => {
-  res.sendFile(__dirname + '/img/:img_path');
-  console.log('got a GET request for img');
-});
-
 function portListener(){
   console.log('Listening on localhost ' + port);
 };
