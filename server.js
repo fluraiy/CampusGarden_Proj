@@ -11,6 +11,26 @@ app.get('/', (req, res) => {
   console.log('got a GET request');
 }); //get request to / is given to responder function
 
+app.get('/about', (req, res) => {
+  res.sendFile(__dirname + '/about.html');
+  console.log('got a GET request');
+}); //get request to /about is given to responder function
+
+app.get('/volunteer', (req, res) => {
+  res.sendFile(__dirname + '/volunteer.html');
+  console.log('got a GET request');
+}); //get request to /volunteer is given to responder function
+
+app.get('/location', (req, res) => {
+  res.sendFile(__dirname + '/location.html');
+  console.log('got a GET request');
+}); //get request to /location is given to responder function
+
+app.get('/contact', (req, res) => {
+  res.sendFile(__dirname + '/contact.html');
+  console.log('got a GET request');
+}); //get request to /volunteer is given to responder function
+
 function portListener(){
   console.log('Listening on localhost ' + port);
 };
