@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Campus Garden Shifts</title>
+</head>
+<body>
+  <h1>Campus Garden Shifts</h1>
+
+  <ul class="shifts">
+    <% for(var i=0; i<shifts.length; i++) {%>
+      <li class="shift">
+        <!-- show data in readonly input elements. The ids are generated with EJS -->
+        <form id="<%= 'form'+i %>" action="/update" method="post">
+          <span>
+            <input type="text" name="date" id="<%= 'date'+i %>" readonly value="<%= shifts[i].date %>">
+          </span>
+          <!-- USE THIS HIDDEN INPUT TO SEND ADDITIONAL INFORMATION TO THE SERVER  -->
+          <!-- WE WANT TO SEND i, THE NUMBER OF THE ROW BEING MODIFIED -->
+          <input type="hidden" name="num" value="<%= i %>">
+          <span>
+            <input type="text" name="start_time" id="<%= 'start_time'+i %>" readonly value="<%= shifts[i].start_time %>">
+          </span>
+          <span>
+            <input type="text" name="end_time" id="<%= 'end_time'+i %>" readonly value="<%= shifts[i].end_time %>">
+          </span>
+          <span>
+            <input type="number" name="num_volunteers" id="<%= 'num_volunteers'+i %>" readonly value="<%= shifts[i].num_volunteers %>">
+          </span>
+          <!-- generate the id for each button with EJS -->
+          <button type="button" id= <%= 'edit' + i %> onclick="edit(this)">Edit</button>
+        </form>
+      </li>
+      <% } %>
+    </ul>
+
+    <form action="/addshift" method="POST">
+      <input type="date" placeholder="date" name="date">
+      <input type="time" placeholder="start time" name="start_time">
+      <input type="time" placeholder="end time" name="end_time">
+      <input type="number" placeholder="num volunteers" name="num_volunteers">
+      <button type="submit">Submit</button>
+    </form>
+
+
+    <script>
+    var content = [];
+    // Respond to the edit button being clicked.
+    // Get the data from title and rating and update the database if they
+    // were modified
+    function edit(button) {
+      // get the number in the button id. It matches the number in the id of the
+      // input element we need
+      var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+      var dateInput = document.getElementById('date'+rownum);
+      var StimeInput = document.getElementById('start_time'+rownum);
+      var EtimeInput = document.getElementById('end_time'+rownum);
+      var numVolInput = document.getElementById('num_volunteers'+rownum);
+
+      if (button.innerHTML == "done") {
+        dateInput.readOnly = true;
+        StimeInput.readOnly = true;
+        EtimeInput.readOnly = true;
+        numVolInput.readOnly = true;
+        // if the content was edited then update the database
+        if (content[rownum].date != dateInput.value || content[rownum].start_time != StimeInput.value || content[rownum].end_time != EtimeInput.value || content[rownum].num_volunteers != numVolInput.value) {
+          var form = document.getElementById('form'+rownum);
+          form.submit();
+          console.log('submitted form');
+        }
+        dateInput.style.backgroundColor = "white";
+        StimeInput.style.backgroundColor = "white";
+        EtimeInput.style.backgroundColor = "white";
+        numVolInput.style.backgroundColor = "white";
+        button.innerHTML = "edit";
+      }
+      else {
+        // get the content of titleInput and ratingInput
+        content[rownum] = {date: dateInput.value, start_time: StimeInput.value, end_time: EtimeInput.value, num_volunteers: numVolInput.value};
+        console.log(content[rownum]);
+        // make this input element editable
+        dateInput.readOnly = false;
+        StimeInput.readOnly = false;
+        EtimeInput.readOnly = false;
+        numVolInput.readOnly = false;
+        dateInput.style.backgroundColor = "yellow";
+        StimeInput.style.backgroundColor = "yellow";
+        EtimeInput.style.backgroundColor = "yellow";
+        numVolInput.style.backgroundColor = "yellow";
+        button.innerHTML = "done";
+      }
+    }
+    </script>
+  </body>
+</html>
