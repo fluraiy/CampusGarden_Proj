@@ -34,6 +34,16 @@ app.get('/contact', (req, res) => {
   console.log('got a GET request');
 }); //get request to /volunteer is given to responder function
 
+app.get('/admin', (req, res) => {
+  res.sendFile(__dirname + '/admin.html');
+  console.log('got a GET request');
+});
+
+app.get('/create-shift', (req, res) => {
+  res.sendFile(__dirname + '/shifts.html');
+  console.log('got a GET request');
+});
+
 app.get('/shifts', (req, res) => {
   //obtain data from shifts into cursor object
   var cursor = db.collection('shifts').find();
