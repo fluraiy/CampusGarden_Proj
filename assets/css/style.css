@@ -753,7 +753,7 @@ height: auto;
 }
 
 .navbar .navbar-nav > .active > a {
-	color: #fff;
+	color: #54ee23;
 }
 .navbar .navbar-nav > .active > a {
 	padding-bottom: 15px;
@@ -1087,7 +1087,7 @@ color:#417630;
 }
 
 .flex-control-paging li a.flex-active {
-	background: #fff;
+	background: #54ee23;
 }
 
 .flex-control-nav {
@@ -1569,7 +1569,6 @@ nav#filter a {
 
 #contact-form input[type=text],#contact-form input[type=email], .contactForm textarea {
 	width: 100%;
-	font-family: 'Open Sans', sans serif;
 	border: 0;
 	font-size:14px;
 	text-align: left;
