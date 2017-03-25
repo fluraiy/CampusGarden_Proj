@@ -66,7 +66,7 @@ app.post('/addshift', (req, res) => {
     if (err)
     return console.log(err);
     console.log('saved to database');
-    //updateIds();  // update the list of shift IDs since a shift was added
+    updateIds();  // update the list of shift IDs since a shift was added
     res.redirect('/shifts');
   });
 });
@@ -91,6 +91,8 @@ var port = process.env.PORT || 3000;
 // db will be associated with the database when the connection to
 // to MongoLab is established.
 var db;
+// The ids of current entries in the database are keep in array ids.
+var ids = new Array();
 
 // Connect to MongoLab, when the connection is established then
 // associate the MongoLab database with variable db and start listening
@@ -104,3 +106,16 @@ MongoClient.connect('mongodb://WFUCG:grow@ds113680.mlab.com:13680/campus_garden'
 
   http.listen(port, portListener);
 });
+
+function updateIds(callback) {
+  var cursor = db.collection('shifts').find();
+  cursor.toArray(function (err, results) {
+    if (err)
+    return console.log(err);
+
+    for (var i = 0; i < results.length; i++) {
+      ids.push(results[i]._id);
+    }
+    callback(ids);
+  });
+}
