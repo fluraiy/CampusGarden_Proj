@@ -20,7 +20,16 @@ app.get('/about', (req, res) => {
 }); //get request to /about is given to responder function
 
 app.get('/volunteer', (req, res) => {
-  res.sendFile(__dirname + '/volunteer.html');
+  //obtain data from shifts into cursor object
+  var cursor = db.collection('shifts').find();
+  //convert to array to extract shift data
+  cursor.toArray(function(err, results){
+    if(err)
+    return console.log(err);
+
+    //render shifts.ejs
+    res.render('volunteer.ejs', {shifts:results});
+  });
   console.log('got a GET request');
 }); //get request to /volunteer is given to responder function
 
@@ -35,7 +44,23 @@ app.get('/contact', (req, res) => {
 }); //get request to /volunteer is given to responder function
 
 app.get('/signup', (req, res) => {
-  res.sendFile(__dirname + '/sign-up.html');
+  //obtain data from shifts into cursor object
+  var cursor1 = db.collection('shifts').find();
+  var cursor2 = db.collection('volunteer').find();
+  //convert to array to extract shift data
+  cursor1.toArray(function(err1, results1){
+    if(err1)
+    return console.log(err1);
+
+    cursor2.toArray(function(err2, results2){
+      if(err2)
+      return console.log(err2);
+  
+      //render sign-up.ejs
+      res.render('sign-up.ejs', {shifts:results1, volunteer:results2});
+    });
+  });
+
   console.log('got a GET request');
 });
 
