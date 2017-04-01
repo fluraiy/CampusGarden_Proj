@@ -121,6 +121,6 @@ function updateIds(callback) {
     for (var i = 0; i < results.length; i++) {
       ids.push(results[i]._id);
     }
-    callback(ids);
+    //callback(ids);
   });
 }
