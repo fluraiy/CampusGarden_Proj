@@ -74,16 +74,16 @@
             <!-- show data in readonly input elements. The ids are generated with EJS -->
             <form id="<%= 'form'+i %>" action="/update" method="post">
               <span>
-                <input type="text" name="date" id="<%= 'date'+i %>" readonly value="<%= shifts[i].date %>">
+                <input type="date" name="date" id="<%= 'date'+i %>" readonly value="<%= shifts[i].date %>">
               </span>
               <!-- USE THIS HIDDEN INPUT TO SEND ADDITIONAL INFORMATION TO THE SERVER  -->
               <!-- WE WANT TO SEND i, THE NUMBER OF THE ROW BEING MODIFIED -->
               <input type="hidden" name="num" value="<%= i %>">
               <span>
-                <input type="text" name="start_time" id="<%= 'start_time'+i %>" readonly value="<%= shifts[i].start_time %>">
+                <input type="time" name="start_time" id="<%= 'start_time'+i %>" readonly value="<%= shifts[i].start_time %>">
               </span>
               <span>
-                <input type="text" name="end_time" id="<%= 'end_time'+i %>" readonly value="<%= shifts[i].end_time %>">
+                <input type="time" name="end_time" id="<%= 'end_time'+i %>" readonly value="<%= shifts[i].end_time %>">
               </span>
               <span>
                 <input type="number" name="num_volunteers" id="<%= 'num_volunteers'+i %>" readonly value="<%= shifts[i].num_volunteers %>">
