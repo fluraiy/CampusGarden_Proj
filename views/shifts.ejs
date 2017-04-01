@@ -16,6 +16,8 @@
 		<link rel="stylesheet" href="css/bootstrap-theme.css">
 		<link href="css/responsive-slider.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/animate.css">
+    <script src="js/jquery.js"></script>
+
         <link rel="stylesheet" href="css/style.css">
 
 		<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -95,12 +97,12 @@
           <% } %>
         </ul>
 
-      <form action="/addshift" method="POST">
+      <form id="addshift"name ="addshift" action="/addshift" method="POST">
         <input type="date" placeholder="date" name="date">
         <input type="time" placeholder="start time" name="start_time">
         <input type="time" placeholder="end time" name="end_time">
         <input type="number" placeholder="num volunteers" name="num_volunteers">
-        <button class="btn-sm" type="submit">Submit</button>
+        <button id="formSubmit" class="btn-sm" type="submit" >Submit</button>
       </form>
     </div>
   </section>
@@ -184,6 +186,57 @@
         button.innerHTML = "done";
       }
     }
+
+$(document).ready(function(){
+  $("form").submit(function(e){
+
+//  var checkBool = true;
+          var x=document.forms["addshift"]["date"].value;
+          var regex=/^[0-9PAMpam/: ]+$/;
+          //alert(x);
+          if (!x.match(regex))
+          {
+              alert("Please reformat your date input.");
+              return false;
+              //checkBool = false;
+            }
+          var localtmp=document.forms["addshift"]["start_time"].value;
+          //alert(localtmp);
+          if (!localtmp.match(regex))
+          {
+              alert("Please reformat your start time input.");
+              return false;
+            //checkBool = false;
+          }
+
+          var localtmp2=document.forms["addshift"]["end_time"].value;
+        //  alert(localtmp2);
+
+          if (!localtmp2.match(regex))
+          {
+              alert("Please reformat your end time input.");
+              return false;
+          //  checkBool = false;
+          }
+
+          var localtmp3=document.forms["addshift"]["num_volunteers"].value;
+        //  alert(localtmp3);
+          if (!localtmp3.match(regex))
+          {
+             alert("Please reformat your input for number of volunteers.");
+              return false;
+              //checkBool = false;
+          }
+
+          // if (checkBool) {
+          //   alert('submit intercepted');
+          //   e.preventDefault(e);
+          //
+          // }
+        });
+});
+
+
     </script>
   </body>
 </html>
