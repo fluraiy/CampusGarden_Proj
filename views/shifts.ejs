@@ -17,6 +17,12 @@
 		<link href="css/responsive-slider.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/animate.css">
     <script src="js/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker();
+    } );
+    </script>
 
         <link rel="stylesheet" href="css/style.css">
 
@@ -74,13 +80,14 @@
         <% for(var i=0; i<shifts.length; i++) {%>
           <li class="shift">
             <!-- show data in readonly input elements. The ids are generated with EJS -->
-            <form id="<%= 'form'+i %>" action="/update" method="post">
+            <form id="<%= 'form'+i %>" action="/update_delete" method="post">
               <span>
                 <input type="date" name="date" id="<%= 'date'+i %>" readonly value="<%= shifts[i].date %>">
               </span>
               <!-- USE THIS HIDDEN INPUT TO SEND ADDITIONAL INFORMATION TO THE SERVER  -->
               <!-- WE WANT TO SEND i, THE NUMBER OF THE ROW BEING MODIFIED -->
               <input type="hidden" name="num" value="<%= i %>">
+              <input id = "<%= 'operation'+i %>" type="hidden" name="operationType" value="update">
               <span>
                 <input type="time" name="start_time" id="<%= 'start_time'+i %>" readonly value="<%= shifts[i].start_time %>">
               </span>
@@ -92,13 +99,14 @@
               </span>
               <!-- generate the id for each button with EJS -->
               <button type="button" id= <%= 'edit' + i %> onclick="edit(this)">Edit</button>
+              <button type="button" id= <%= 'delete' + i %> onclick="remove(this)">Delete</button>
             </form>
           </li>
           <% } %>
         </ul>
 
       <form id="addshift"name ="addshift" action="/addshift" method="POST">
-        <input type="date" placeholder="date" name="date">
+        <input type="text" id="datepicker" placeholder="date" name="date">
         <input type="time" placeholder="start time" name="start_time">
         <input type="time" placeholder="end time" name="end_time">
         <input type="number" placeholder="num volunteers" name="num_volunteers">
@@ -185,6 +193,16 @@
         numVolInput.style.backgroundColor = "yellow";
         button.innerHTML = "done";
       }
+    }
+
+    function remove(button){
+        var rownum = button.id.match(/\d+/)[0];
+
+        var elem = document.getElementById('operation' + rownum);
+        elem.value = "delete";
+        var form = document.getElementById('form'+rownum);
+        form.submit();
+        console.log('submitted form');
     }
 
 $(document).ready(function(){
