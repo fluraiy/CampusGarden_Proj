@@ -162,19 +162,19 @@
       var numVolInput = document.getElementById('num_volunteers'+rownum);
 
       if (button.innerHTML == "done") {
-        dateInput.readOnly = true;
-        StimeInput.readOnly = true;
-        EtimeInput.readOnly = true;
+        //dateInput.readOnly = true;
+        //StimeInput.readOnly = true;
+        //EtimeInput.readOnly = true;
         numVolInput.readOnly = true;
         // if the content was edited then update the database
-        if (content[rownum].date != dateInput.value || content[rownum].start_time != StimeInput.value || content[rownum].end_time != EtimeInput.value || content[rownum].num_volunteers != numVolInput.value) {
+        if (content[rownum].num_volunteers != numVolInput.value) {
           var form = document.getElementById('form'+rownum);
           form.submit();
           console.log('submitted form');
         }
-        dateInput.style.backgroundColor = "white";
-        StimeInput.style.backgroundColor = "white";
-        EtimeInput.style.backgroundColor = "white";
+        //dateInput.style.backgroundColor = "white";
+        //StimeInput.style.backgroundColor = "white";
+        //EtimeInput.style.backgroundColor = "white";
         numVolInput.style.backgroundColor = "white";
         button.innerHTML = "edit";
       }
@@ -183,13 +183,13 @@
         content[rownum] = {date: dateInput.value, start_time: StimeInput.value, end_time: EtimeInput.value, num_volunteers: numVolInput.value};
         console.log(content[rownum]);
         // make this input element editable
-        dateInput.readOnly = false;
-        StimeInput.readOnly = false;
-        EtimeInput.readOnly = false;
+        //dateInput.readOnly = false;
+        //StimeInput.readOnly = false;
+        //EtimeInput.readOnly = false;
         numVolInput.readOnly = false;
-        dateInput.style.backgroundColor = "yellow";
-        StimeInput.style.backgroundColor = "yellow";
-        EtimeInput.style.backgroundColor = "yellow";
+        //dateInput.style.backgroundColor = "yellow";
+        //StimeInput.style.backgroundColor = "yellow";
+        //EtimeInput.style.backgroundColor = "yellow";
         numVolInput.style.backgroundColor = "yellow";
         button.innerHTML = "done";
       }
