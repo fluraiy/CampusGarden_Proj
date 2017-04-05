@@ -205,54 +205,84 @@
         console.log('submitted form');
     }
 
-$(document).ready(function(){
-  $("form").submit(function(e){
+    $(document).ready(function(){
 
-//  var checkBool = true;
-          var x=document.forms["addshift"]["date"].value;
-          var regex=/^[0-9PAMpam/: ]+$/;
-          //alert(x);
-          if (!x.match(regex))
-          {
-              alert("Please reformat your date input.");
-              return false;
-              //checkBool = false;
+    var chrome = navigator.userAgent.indexOf('Chrome') > -1;
+
+
+
+      $("form").submit(function(e){
+    if(!chrome) {
+              var x=document.forms["addshift"]["date"].value;
+              var regex=/^[0-9PAMpam/: ]+$/;
+              //alert(x);
+              // if (!x.match(regex))
+              // {
+              //     alert("Please reformat your date input.");
+              //     return false;
+              //   }
+              var localtmp=document.forms["addshift"]["start_time"].value;
+              //alert(localtmp);
+              if (!localtmp.match(regex))
+              {
+                  alert("Please reformat your start time input.");
+                  return false;
+              }
+
+              var localtmp2=document.forms["addshift"]["end_time"].value;
+
+              if (!localtmp2.match(regex))
+              {
+                  alert("Please reformat your end time input.");
+                  return false;
+              }
+
+              var localtmp3=document.forms["addshift"]["num_volunteers"].value;
+              if (!localtmp3.match(regex))
+              {
+                 alert("Please reformat your input for number of volunteers.");
+                  return false;
+              }
+
+
+          } else {
+            var x=document.forms["addshift"]["date"].value;
+            var regex=/^[0-9-:]+$/;
+            // alert(x);
+            // if (!x.match(regex))
+            // {
+            //     alert("Please reformat your date input.");
+            //     return false;
+            //   }
+            var localtmp=document.forms["addshift"]["start_time"].value;
+            //alert(localtmp);
+            if (!localtmp.match(regex))
+            {
+                alert("Please reformat your start time input.");
+                return false;
             }
-          var localtmp=document.forms["addshift"]["start_time"].value;
-          //alert(localtmp);
-          if (!localtmp.match(regex))
-          {
-              alert("Please reformat your start time input.");
-              return false;
-            //checkBool = false;
+
+            var localtmp2=document.forms["addshift"]["end_time"].value;
+          //  alert(localtmp2);
+
+            if (!localtmp2.match(regex))
+            {
+                alert("Please reformat your end time input.");
+                return false;
+            }
+
+            var localtmp3=document.forms["addshift"]["num_volunteers"].value;
+          //  alert(localtmp3);
+            if (!localtmp3.match(regex))
+            {
+               alert("Please reformat your input for number of volunteers.");
+                return false;
+            }
+
           }
+            });
+    });
 
-          var localtmp2=document.forms["addshift"]["end_time"].value;
-        //  alert(localtmp2);
-
-          if (!localtmp2.match(regex))
-          {
-              alert("Please reformat your end time input.");
-              return false;
-          //  checkBool = false;
-          }
-
-          var localtmp3=document.forms["addshift"]["num_volunteers"].value;
-        //  alert(localtmp3);
-          if (!localtmp3.match(regex))
-          {
-             alert("Please reformat your input for number of volunteers.");
-              return false;
-              //checkBool = false;
-          }
-
-          // if (checkBool) {
-          //   alert('submit intercepted');
-          //   e.preventDefault(e);
-          //
-          // }
-        });
-});
 
 
     </script>
