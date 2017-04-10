@@ -89,8 +89,23 @@
                   <div class="validation"></div>
               </div>
               <div class="form-group">
+                <label for="orgName" class="col-2 col-form-label">Organization Name</label>
+                  <input type="text" name="name" class="form-control" id="orgName" placeholder="Organization Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="groupVol" class="col-2 col-form-label">I am registering a group to volunteer</label>
+                  <input type="checkbox" name="name" id="groupVol" placeholder="Number of Volunteers" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="numVols" class="col-2 col-form-label">Number of Volunteers</label>
+                  <input type="number" name="name" class="form-control" id="numVols" placeholder="1" data-rule="min:1" data-msg="Please enter at least 4 chars" readonly/>
+                  <div class="validation"></div>
+              </div>
+              <div class="form-group">
                   <label for="date" class="col-2 col-form-label">Date</label>
-                  <input type="date" class="form-control" name="date" id="date" value = ""/>
+                  <input type="date" class="form-control" name="date" id="date" value = "" readonly/>
                   <div class="validation"></div>
               </div>
               <div class="text-center"><button type="submit" class="line-btn green">Sign Up</button></div>
