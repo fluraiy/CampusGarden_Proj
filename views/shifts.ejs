@@ -196,13 +196,16 @@
     }
 
     function remove(button){
+        var confirmTest = confirm("Are you sure you want to delete this data?");
+        if (confirmTest) {
         var rownum = button.id.match(/\d+/)[0];
 
         var elem = document.getElementById('operation' + rownum);
         elem.value = "delete";
         var form = document.getElementById('form'+rownum);
         form.submit();
-        console.log('submitted form');
+        console.log('submitted form'); }
+        else {console.log('User prevented delete.')}
     }
 
     $(document).ready(function(){
