@@ -116,7 +116,7 @@ app.post('/addVolunteer', (req, res) => {
   console.log('got Post /addVolunteer request');
   console.log(req.body);
 
-  db.collection('volunteers').save(req.body, (err, result) => {
+  db.collection('volunteer').save(req.body, (err, result) => {
     if (err)
     return console.log(err);
     console.log('saved to database');
@@ -192,7 +192,7 @@ function updateIds(callback) {
 }
 
 function updateVolunteersIds(callback) {
-  var cursor = db.collection('volunteers').find();
+  var cursor = db.collection('volunteer').find();
   cursor.toArray(function (err, results) {
     if (err)
     return console.log(err);

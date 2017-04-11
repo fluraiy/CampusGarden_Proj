@@ -96,7 +96,7 @@
               </div>
               <div class="form-group">
                 <label for="groupVol" class="col-2 col-form-label">I am registering a group to volunteer</label>
-                  <input type="checkbox" name="groupVol" id="groupVol" placeholder="Number of Volunteers" />
+                  <input type="checkbox" name="groupVol" id="groupVol" placeholder="Number of Volunteers" onclick="checkboxHandler()" />
                 <div class="validation"></div>
               </div>
               <div class="form-group">
@@ -150,6 +150,17 @@
     var item2 = localStorage.getItem("date_");
 
     document.getElementById("date").innerHTML = item2;
+
+    var clickedGroupVols = false;
+    function checkboxHandler(){
+      if(!clickedGroupVols){
+        clickedGroupVols = true;
+        document.getElementById("numVols").readOnly = false;
+      } else {
+        clickedGroupVols = false;
+        document.getElementById("numVols").readOnly = true;
+      }
+    }
 
   </script>
 
