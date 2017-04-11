@@ -112,6 +112,19 @@ app.post('/addshift', (req, res) => {
   });
 });
 
+app.post('/addVolunteer', (req, res) => {
+  console.log('got Post /addVolunteer request');
+  console.log(req.body);
+
+  db.collection('volunteers').save(req.body, (err, result) => {
+    if (err)
+    return console.log(err);
+    console.log('saved to database');
+    updateVolunteersIds();  // update the list of volunteer IDs since a volunteer was added
+    res.redirect('/volunteer');
+  });
+});
+
 app.post('/update_delete', (req, res) => {
   console.log('got Post /update_delete request');
   console.log(req.body);
@@ -147,6 +160,7 @@ var port = process.env.PORT || 3000;
 var db;
 // The ids of current entries in the database are keep in array ids.
 var ids = new Array();
+var volIds = new Array();
 
 // Connect to MongoLab, when the connection is established then
 // associate the MongoLab database with variable db and start listening
@@ -174,5 +188,19 @@ function updateIds(callback) {
     }
     if (typeof callback != "undefined")
       callback(ids);
+  });
+}
+
+function updateVolunteersIds(callback) {
+  var cursor = db.collection('volunteers').find();
+  cursor.toArray(function (err, results) {
+    if (err)
+    return console.log(err);
+    volIds = [];
+    for (var i = 0; i < results.length; i++) {
+      volIds.push(results[i]._id);
+    }
+    if (typeof callback != "undefined")
+      callback(volIds);
   });
 }
