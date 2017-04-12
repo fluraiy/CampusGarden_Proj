@@ -112,6 +112,11 @@ app.post('/addshift', (req, res) => {
   });
 });
 
+app.get('/adminLogin', (req, res) => {
+  res.sendFile(__dirname + '/adminLogin.html');
+  console.log('got a GET request');
+});
+
 app.post('/addVolunteer', (req, res) => {
   console.log('got Post /addVolunteer request');
   console.log(req.body);
