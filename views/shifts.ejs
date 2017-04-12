@@ -153,6 +153,8 @@
     // Get the data from title and rating and update the database if they
     // were modified
     function edit(button) {
+
+
       // get the number in the button id. It matches the number in the id of the
       // input element we need
       var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
@@ -160,8 +162,11 @@
       var StimeInput = document.getElementById('start_time'+rownum);
       var EtimeInput = document.getElementById('end_time'+rownum);
       var numVolInput = document.getElementById('num_volunteers'+rownum);
-
+      var origNum = document.getElementById('num_volunteers'+rownum).value;
+    //  alert(numVolInput);
       if (button.innerHTML == "done") {
+        var confirmTest = confirm("Are you sure you want to edit this data?");
+        if (confirmTest) {
         //dateInput.readOnly = true;
         //StimeInput.readOnly = true;
         //EtimeInput.readOnly = true;
@@ -177,7 +182,17 @@
         //EtimeInput.style.backgroundColor = "white";
         numVolInput.style.backgroundColor = "white";
         button.innerHTML = "edit";
-      }
+      } else {
+        //numVolInput.style.backgroundColor = "white";
+        //button.innerHTML = "edit";
+        //numVolInput.readOnly = true;
+        console.log("User prevented edit submit.")
+        //var url = window.location.href;
+        $("#num_volunteers"+rownum).val("");
+        //works
+        //window.location.reload();
+}
+    }
       else {
         // get the content of titleInput and ratingInput
         content[rownum] = {date: dateInput.value, start_time: StimeInput.value, end_time: EtimeInput.value, num_volunteers: numVolInput.value};
@@ -193,6 +208,7 @@
         numVolInput.style.backgroundColor = "yellow";
         button.innerHTML = "done";
       }
+
     }
 
     function remove(button){
