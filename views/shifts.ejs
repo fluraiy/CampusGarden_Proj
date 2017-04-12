@@ -182,15 +182,14 @@
         //EtimeInput.style.backgroundColor = "white";
         numVolInput.style.backgroundColor = "white";
         button.innerHTML = "edit";
-      } else {
-        //numVolInput.style.backgroundColor = "white";
-        //button.innerHTML = "edit";
-        //numVolInput.readOnly = true;
+      } else {  numVolInput.style.backgroundColor = "white";
+        button.innerHTML = "edit";
+        numVolInput.readOnly = true;
         console.log("User prevented edit submit.")
-        //var url = window.location.href;
-        $("#num_volunteers"+rownum).val("");
+        var url = window.location.href;
+      //  $("#num_volunteers"+rownum).load(url+"#num_volunteers"+rownum);
         //works
-        //window.location.reload();
+        window.location.reload();
 }
     }
       else {
