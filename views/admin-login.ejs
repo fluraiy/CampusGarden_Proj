@@ -58,11 +58,93 @@
 	</section>
 	</div>
 
+<section id="services" class="pad-top10 pad-bot5 bg-white">
+    <div class="container">
+  <ul class="login">
+    <% for(var i=0; i<shifts.length; i++) {%>
+      <li class="loginInfo">
+        <!-- show data in readonly input elements. The ids are generated with EJS -->
+    <!--   <form id="<%= 'form'+i %>" action="/update" method="post">
+          <span>
+            <input type="date" name="date" id="<%= 'date'+i %>" readonly value="<%= shifts[i].date %>">
+          </span>
+
+    -->
+          <!-- USE THIS HIDDEN INPUT TO SEND ADDITIONAL INFORMATION TO THE SERVER  -->
+          <!-- WE WANT TO SEND i, THE NUMBER OF THE ROW BEING MODIFIED -->
+    <!--
+          <input type="hidden" name="num" value="<%= i %>">
+          <span>
+            <input type="time" name="start_time" id="<%= 'start_time'+i %>" readonly value="<%= shifts[i].start_time %>">
+          </span>
+          <span>
+            <input type="time" name="end_time" id="<%= 'end_time'+i %>" readonly value="<%= shifts[i].end_time %>">
+          </span>
+          <span>
+            <input type="number" name="num_volunteers" id="<%= 'num_volunteers'+i %>" readonly value="<%= shifts[i].num_volunteers %>">
+          </span>
+    -->
+          <!-- generate the id for each button with EJS -->
+          <button type="button" id= <%= 'log_in' + i %> onclick="bLogin(this)">Login</button>
+        </form>
+      </li>
+      <% } %>
+    </ul>
+</div>
+</section>
+
+
+
 		<!-- spacer section:stats -->
+    <section id="footer" class="section footer">
+  		<div class="container">
+  			<div class="row animated opacity mar-bot0" data-andown="fadeIn" data-animation="animation">
+  				<div class="col-sm-12 align-center">
+                      <ul class="social-network social-circle">
+                          <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                          <li><a href="https://www.facebook.com/SustainableWFU/" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="https://twitter.com/SustainableWFU" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                          <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                          <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                      </ul>
+  				</div>
+  			</div>
+
+  			<div class="row align-center copyright">
+  					<div class="col-sm-12">
+  					    <p>&copy; GREEN Theme</p>
+                          <div class="credits">
+                              <!--
+                                  All the links in the footer should remain intact.
+                                  You can delete the links only if you purchased the pro version.
+                                  Licensing information: https://bootstrapmade.com/license/
+                                  Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Green
+                              -->
+                              <a href="https://bootstrapmade.com/">Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                          </div>
+                      </div>
+  			</div>
+  		</div>
+
+  	</section>
+  	<a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>
 
 
+    <script>
+      function bLogin(button){
+    /*
+        var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+        var dateInput = document.getElementById('date'+rownum).value;
+        localStorage.setItem('shiftID', rownum);
+        localStorage.setItem('date_', dateInput);
+  */
 
-  
+        window.location = "/admin.html"
+        return false;
+      }
+    </script>
+
+
 
 	<script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script src="js/jquery.js"></script>
