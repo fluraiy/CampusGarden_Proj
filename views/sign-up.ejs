@@ -75,6 +75,7 @@
           <div id="sendmessage">You have successfully signed up to volunteer. Thank you!</div>
           <div id="errormessage"></div>
           <form id="addvolunteer" action="/addVolunteer" method="POST" role="form" class="contactForm">
+            <input type="hidden" name="shiftID" id="shiftID">
             <div class="form-group">
               <label for="email" class="col-2 col-form-label">Your Email</label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
@@ -144,11 +145,10 @@
 
 	</section>
 	<a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>
-
   <script>
     var item1 = localStorage.getItem("shiftID");
     var item2 = localStorage.getItem("date_");
-
+    document.getElementById("shiftID").value = item1;
     document.getElementById("date").innerHTML = item2;
 
     var clickedGroupVols = false;
@@ -161,9 +161,8 @@
         document.getElementById("numVols").readOnly = true;
       }
     }
-
   </script>
-
+  <script src="js/database.js"></script>
 	<script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>

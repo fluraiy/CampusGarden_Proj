@@ -86,6 +86,7 @@
               <!-- USE THIS HIDDEN INPUT TO SEND ADDITIONAL INFORMATION TO THE SERVER  -->
               <!-- WE WANT TO SEND i, THE NUMBER OF THE ROW BEING MODIFIED -->
               <input type="hidden" name="num" value="<%= i %>">
+              <input type="hidden" name="shiftID" id="<%= 'shiftID'+i %>" value="<%= shifts[i]._id %>">
               <span>
                 <input type="time" name="start_time" id="<%= 'start_time'+i %>" readonly value="<%= shifts[i].start_time %>">
               </span>
@@ -140,10 +141,10 @@
 
   <script>
     function signUp(button){
-
       var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
       var dateInput = document.getElementById('date'+rownum).value;
-      localStorage.setItem('shiftID', rownum);
+      var shift = document.getElementById('shiftID'+rownum).value;
+      localStorage.setItem('shiftID', shift);
       localStorage.setItem('date_', dateInput);
 
 
