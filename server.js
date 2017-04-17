@@ -124,14 +124,30 @@ app.post('/addVolunteer', (req, res) => {
   console.log(req.body);
 
   //create object that stores items needed for signup table
-  
+  var signup = {};
+  signup.email = req.body.email;
+  signup.shiftID = req.body.shiftID;
+  signup.numVols = req.body.numVols;
 
-  db.collection('volunteer').save(req.body, (err, result) => {
+  var vol = {};
+  vol.email = req.body.email;
+  vol.firstName = req.body.firstName;
+  vol.lastName = req.body.lastName;
+  vol.orgName = req.body.orgName;
+  vol.groupVol = req.body.groupVol;
+  vol.numVols = req.body.numVols;
+
+  db.collection('volunteer').save(vol, (err, result) => {
     if (err)
     return console.log(err);
-    console.log('saved to database');
+    console.log('volunteer saved to database');
     updateVolunteersIds();  // update the list of volunteer IDs since a volunteer was added
-    res.redirect('/volunteer');
+    db.collection('signup').save(signup, (err, result) => {
+      if (err)
+      return console.log(err);
+      console.log('signup record saved to database');
+      res.redirect('/location');
+    });
   });
 });
 
