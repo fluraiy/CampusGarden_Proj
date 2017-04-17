@@ -29,17 +29,22 @@ app.get('/volunteer', (req, res) => {
   var stringDate = ('0' + (todaysDate.getMonth()+1)).slice(-2) + '/' +
     ('0' + todaysDate.getDate()).slice(-2) + '/' + todaysDate.getFullYear();
   console.log(stringDate);
-  var cursor = db.collection('shifts').find({"date":{$gte: stringDate}});
+  var cursor1 = db.collection('shifts').find({"date":{$gte: stringDate}});
+  var cursor2 = db.collection('signup').find();
   //var cursor = db.collection('shifts').find({"date":{$gte: "04/04/2017"}});
   //convert to array to extract shift data
-  cursor.toArray(function(err, results){
-    if(err)
-    return console.log(err);
-
+  cursor1.toArray(function(err1, results1){
+    if(err1)
+    return console.log(err1);
     console.log("got these filtered results:")
-    console.log(results);
+    console.log(results1);
     //render shifts.ejs
-    res.render('volunteer.ejs', {shifts:results});
+    cursor2.toArray(function(err2, results2){
+      if(err2)
+      return console.log(err2);
+
+      res.render('volunteer.ejs', {shifts:results1, signup:results2});
+    });
   });
   console.log('got a GET request');
 }); //get request to /volunteer is given to responder function
