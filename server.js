@@ -85,6 +85,11 @@ app.get('/admin', (req, res) => {
   console.log('got a GET request');
 });
 
+app.get('/register', (req, res) => {
+  res.sendFile(__dirname + '/register.html');
+  console.log('got a GET request');
+});
+
 app.get('/create-shift', (req, res) => {
   res.sendFile(__dirname + '/shifts.html');
   console.log('got a GET request');
@@ -153,6 +158,24 @@ app.post('/addVolunteer', (req, res) => {
       console.log('signup record saved to database');
       res.redirect('/location');
     });
+  });
+});
+
+app.post('/addAdmin', (req, res) => {
+  console.log('got Post /addAdmin request');
+  console.log(req.body);
+
+  //create object that stores items needed for signup table
+  var user = {};
+  user.Aemail = req.body.Aemail;
+  user.Apassword = req.body.Apassword;
+
+  db.collection('admins').save(user, (err, result) => {
+    if (err)
+    return console.log(err);
+    console.log('admin user saved to database');
+    updateAdminIds();  // update the list of admin IDs since an admin was added
+    res.redirect('/adminLogin')
   });
 });
 

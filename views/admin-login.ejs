@@ -58,40 +58,39 @@
 	</section>
 	</div>
 
-<section id="services" class="pad-top10 pad-bot5 bg-white">
-    <div class="container">
-  <ul class="login">
-    <% for(var i=0; i<shifts.length; i++) {%>
-      <li class="loginInfo">
-        <!-- show data in readonly input elements. The ids are generated with EJS -->
-    <!--   <form id="<%= 'form'+i %>" action="/update" method="post">
-          <span>
-            <input type="date" name="date" id="<%= 'date'+i %>" readonly value="<%= shifts[i].date %>">
-          </span>
+  <section id="services" class="section pad-top10 pad-bot5 bg-white">
+		<div class="container">
+      <div class="row mar-bot40">
+        <div class="col-md-offset-3 col-md-6">
+          <div class="section-header">
+            <h2 class="section-heading animated" data-animation="bounceInUp">Request Access</h2>
+          </div>
+        </div>
+      </div>
+  <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div id="sendmessage">You have successfully requested access. Thank you!</div>
+          <div id="errormessage"></div>
+          <form id="addadmin" action="/addAdmin" method="POST" role="form" class="contactForm">
+            <div class="form-group">
+              <label for="email" class="col-2 col-form-label">Your Email</label>
+                <input type="email" class="form-control" name="Aemail" id="Aemail" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
+                <div class="validation"></div>
+            </div>
+              <div class="form-group">
+                <label for="APassword" class="col-2 col-form-label">Password</label>
+                  <input type="text" name="Apassword" class="form-control" id="Apassword" placeholder="password" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <div class="validation"></div>
+              </div>
 
-    -->
-          <!-- USE THIS HIDDEN INPUT TO SEND ADDITIONAL INFORMATION TO THE SERVER  -->
-          <!-- WE WANT TO SEND i, THE NUMBER OF THE ROW BEING MODIFIED -->
-    <!--
-          <input type="hidden" name="num" value="<%= i %>">
-          <span>
-            <input type="time" name="start_time" id="<%= 'start_time'+i %>" readonly value="<%= shifts[i].start_time %>">
-          </span>
-          <span>
-            <input type="time" name="end_time" id="<%= 'end_time'+i %>" readonly value="<%= shifts[i].end_time %>">
-          </span>
-          <span>
-            <input type="number" name="num_volunteers" id="<%= 'num_volunteers'+i %>" readonly value="<%= shifts[i].num_volunteers %>">
-          </span>
-    -->
-          <!-- generate the id for each button with EJS -->
-          <button type="button" id= <%= 'log_in' + i %> onclick="bLogin(this)">Login</button>
+              <div class="text-center"><button id="adminFormSubmit" type="submit" class="line-btn green">Submit</button></div>
         </form>
-      </li>
-      <% } %>
-    </ul>
-</div>
-</section>
+      </div>
+
+  </div>
+  </section>
+
+
 
 
 
