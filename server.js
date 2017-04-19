@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   console.log('got a GET request');
 }); //get request to / is given to responder function
 
+app.get('/verifyAdmin', (req, res) => {
+  console.log('got a verifyAdmin GET request');
+});
+
 app.get('/about', (req, res) => {
   res.sendFile(__dirname + '/about.html');
   console.log('got a GET request');
