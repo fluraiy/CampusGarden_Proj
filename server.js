@@ -54,6 +54,12 @@ app.get('/location', (req, res) => {
   console.log('got a GET request');
 }); //get request to /location is given to responder function
 
+app.get('/register', (req, res) => {
+  //res.sendFile(__dirname + '/register.html');
+  res.render('admin-login.ejs');
+  console.log('got a GET request');
+});
+
 app.get('/contact', (req, res) => {
   res.sendFile(__dirname + '/contact.html');
   console.log('got a GET request');
@@ -85,10 +91,6 @@ app.get('/admin', (req, res) => {
   console.log('got a GET request');
 });
 
-app.get('/register', (req, res) => {
-  res.sendFile(__dirname + '/register.html');
-  console.log('got a GET request');
-});
 
 app.get('/create-shift', (req, res) => {
   res.sendFile(__dirname + '/shifts.html');
@@ -215,6 +217,7 @@ var db;
 // The ids of current entries in the database are keep in array ids.
 var ids = new Array();
 var volIds = new Array();
+var adminIds = new Array();
 
 // Connect to MongoLab, when the connection is established then
 // associate the MongoLab database with variable db and start listening
@@ -256,5 +259,19 @@ function updateVolunteersIds(callback) {
     }
     if (typeof callback != "undefined")
       callback(volIds);
+  });
+}
+
+function updateAdminIds(callback) {
+  var cursor = db.collection('admins').find();
+  cursor.toArray(function (err, results) {
+    if (err)
+    return console.log(err);
+    adminIds = [];
+    for (var i = 0; i < results.length; i++) {
+      ids.push(results[i]._id);
+    }
+    if (typeof callback != "undefined")
+      callback(adminIds);
   });
 }
