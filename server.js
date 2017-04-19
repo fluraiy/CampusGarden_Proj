@@ -29,17 +29,22 @@ app.get('/volunteer', (req, res) => {
   var stringDate = ('0' + (todaysDate.getMonth()+1)).slice(-2) + '/' +
     ('0' + todaysDate.getDate()).slice(-2) + '/' + todaysDate.getFullYear();
   console.log(stringDate);
-  var cursor = db.collection('shifts').find({"date":{$gte: stringDate}});
+  var cursor1 = db.collection('shifts').find({"date":{$gte: stringDate}});
+  var cursor2 = db.collection('signup').find();
   //var cursor = db.collection('shifts').find({"date":{$gte: "04/04/2017"}});
   //convert to array to extract shift data
-  cursor.toArray(function(err, results){
-    if(err)
-    return console.log(err);
-
+  cursor1.toArray(function(err1, results1){
+    if(err1)
+    return console.log(err1);
     console.log("got these filtered results:")
-    console.log(results);
+    console.log(results1);
     //render shifts.ejs
-    res.render('volunteer.ejs', {shifts:results});
+    cursor2.toArray(function(err2, results2){
+      if(err2)
+      return console.log(err2);
+
+      res.render('volunteer.ejs', {shifts:results1, signup:results2});
+    });
   });
   console.log('got a GET request');
 }); //get request to /volunteer is given to responder function
@@ -48,6 +53,12 @@ app.get('/location', (req, res) => {
   res.sendFile(__dirname + '/location.html');
   console.log('got a GET request');
 }); //get request to /location is given to responder function
+
+app.get('/register', (req, res) => {
+  //res.sendFile(__dirname + '/register.html');
+  res.render('admin-login.ejs');
+  console.log('got a GET request');
+});
 
 app.get('/contact', (req, res) => {
   res.sendFile(__dirname + '/contact.html');
@@ -79,6 +90,7 @@ app.get('/admin', (req, res) => {
   res.sendFile(__dirname + '/admin.html');
   console.log('got a GET request');
 });
+
 
 app.get('/create-shift', (req, res) => {
   res.sendFile(__dirname + '/shifts.html');
@@ -115,19 +127,57 @@ app.post('/addshift', (req, res) => {
 app.get('/adminLogin', (req, res) => {
   res.sendFile(__dirname + '/adminLogin.html');
   console.log('got a GET request');
-  
+
 });
+
 
 app.post('/addVolunteer', (req, res) => {
   console.log('got Post /addVolunteer request');
   console.log(req.body);
 
-  db.collection('volunteer').save(req.body, (err, result) => {
+  //create object that stores items needed for signup table
+  var signup = {};
+  signup.email = req.body.email;
+  signup.shiftID = req.body.shiftID;
+  signup.numVols = req.body.numVols;
+
+  var vol = {};
+  vol.email = req.body.email;
+  vol.firstName = req.body.firstName;
+  vol.lastName = req.body.lastName;
+  vol.orgName = req.body.orgName;
+  vol.groupVol = req.body.groupVol;
+  vol.numVols = req.body.numVols;
+
+  db.collection('volunteer').save(vol, (err, result) => {
     if (err)
     return console.log(err);
-    console.log('saved to database');
+    console.log('volunteer saved to database');
     updateVolunteersIds();  // update the list of volunteer IDs since a volunteer was added
-    res.redirect('/volunteer');
+    db.collection('signup').save(signup, (err, result) => {
+      if (err)
+      return console.log(err);
+      console.log('signup record saved to database');
+      res.redirect('/location');
+    });
+  });
+});
+
+app.post('/addAdmin', (req, res) => {
+  console.log('got Post /addAdmin request');
+  console.log(req.body);
+
+  //create object that stores items needed for signup table
+  var user = {};
+  user.Aemail = req.body.Aemail;
+  user.Apassword = req.body.Apassword;
+
+  db.collection('admins').save(user, (err, result) => {
+    if (err)
+    return console.log(err);
+    console.log('admin user saved to database');
+    updateAdminIds();  // update the list of admin IDs since an admin was added
+    res.redirect('/adminLogin')
   });
 });
 
@@ -167,6 +217,7 @@ var db;
 // The ids of current entries in the database are keep in array ids.
 var ids = new Array();
 var volIds = new Array();
+var adminIds = new Array();
 
 // Connect to MongoLab, when the connection is established then
 // associate the MongoLab database with variable db and start listening
@@ -208,5 +259,19 @@ function updateVolunteersIds(callback) {
     }
     if (typeof callback != "undefined")
       callback(volIds);
+  });
+}
+
+function updateAdminIds(callback) {
+  var cursor = db.collection('admins').find();
+  cursor.toArray(function (err, results) {
+    if (err)
+    return console.log(err);
+    adminIds = [];
+    for (var i = 0; i < results.length; i++) {
+      ids.push(results[i]._id);
+    }
+    if (typeof callback != "undefined")
+      callback(adminIds);
   });
 }

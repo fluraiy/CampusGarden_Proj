@@ -86,6 +86,7 @@
               <!-- USE THIS HIDDEN INPUT TO SEND ADDITIONAL INFORMATION TO THE SERVER  -->
               <!-- WE WANT TO SEND i, THE NUMBER OF THE ROW BEING MODIFIED -->
               <input type="hidden" name="num" value="<%= i %>">
+              <input type="hidden" name="shiftID" id="<%= 'shiftID'+i %>" value="<%= shifts[i]._id %>">
               <span>
                 <input type="time" name="start_time" id="<%= 'start_time'+i %>" readonly value="<%= shifts[i].start_time %>">
               </span>
@@ -140,16 +141,39 @@
 
   <script>
     function signUp(button){
-
       var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
       var dateInput = document.getElementById('date'+rownum).value;
-      localStorage.setItem('shiftID', rownum);
+      var shift = document.getElementById('shiftID'+rownum).value;
+      localStorage.setItem('shiftID', shift);
       localStorage.setItem('date_', dateInput);
 
 
       window.location = "/signup"
       return false;
     }
+
+    //function to disable a button if the number of volunteers has been maxed out
+    /*function shiftFull(button){  console.log("Hello World!!!!!!!!!!!!!");
+      var rownum = button.id.match(/\d+/)[0];
+      var shift = document.getElementById('shiftID'+rownum).value;
+      var maxNum = document.getElementById('num_volunteers'+rownum).value;
+
+      //count number of volunteers already signed up for this selected shift
+      int i;
+      int volCount = 0;
+      for(i = 0; i < signup.length; i++){
+        if(signup[i].shiftID == shift){
+          volCount += signup[i].numVols;
+        }
+      }
+      console.log("number of voluneteers signed up: " + volCount);
+      //check whether there are already maxed out on the number of volunteers for a shifts
+      if(volCount >= maxNum)
+        button.disabled = true;
+      else {
+        button.disabled = false;
+      }
+    }*/
   </script>
 
 	<script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
