@@ -97,7 +97,23 @@
                 <input type="number" name="num_volunteers" id="<%= 'num_volunteers'+i %>" readonly value="<%= shifts[i].num_volunteers %>">
               </span>
               <!-- generate the id for each button with EJS -->
-              <button type="button" id= <%= 'sign_up' + i %> onclick="signUp(this)">Sign Up</button>
+              <button type="button" id= <%= 'sign_up' + i %>
+                <%
+                var volCount = 0;
+                for(j= 0; j< signup.length; j++){
+                  if(signup[j].shiftID == shifts[i]._id){
+                    volCount += parseInt(signup[j].numVols);
+                  }
+                }
+                console.log("In volunteer.ejs: " + volCount);
+
+                if (volCount >= shifts[i].num_volunteers) {
+                %>
+                <%=
+                   'disabled'
+                %>
+                <% } %>
+                onclick="signUp(this)">Sign Up</button>
             </form>
           </li>
           <% } %>
