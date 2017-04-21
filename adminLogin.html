@@ -66,21 +66,20 @@
                     <h3 class="panel-title">Admin Login</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
-                        <fieldset>
+                    <form role="form" id="verifyForm" action="/verifyAdmin" method="GET">
+
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input class="form-control" placeholder="E-mail" id= "admEmail" name="admEmail" type="email" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input id= "admPass" class="form-control" placeholder="Password" name="admPass" type="password" value="">
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a type="button" type="submit" href="/verifyAdmin" class="btn btn-success btn-block">Login</a>
+                            <div class="text-center"><button id="loginSubmit" type="submit" class="line-btn green">Login</button></div>
+                            <p>New Member? Request Access.<a href="/register" class="">Sign up</a></p>
+                        </form>
 
-													  <p>New Member? Request Access.<a href="/register" class="">Sign up</a></p>
 
-                        </fieldset>
-                    </form>
                 </div>
             </div>
         </div>
