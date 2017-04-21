@@ -7,6 +7,7 @@ var app = express(); //create an express app (to hanle html stuff)
 var http = httpModule.Server(app);
 
 app.use(express.static('assets')); //any assets will be found in the folder assets (pics and such)
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
@@ -16,22 +17,30 @@ app.get('/', (req, res) => {
 
 app.get('/verifyAdmin', (req, res) => {
   console.log('got a verifyAdmin GET request');
-  console.log(req.body);
+  console.log(JSON.stringify(req.query));
 
-  var temp = {};
-  temp.admEmail = req.body.admEmail;
-  temp.admPass = req.body.admPass;
-  var email = "";
-  var cursor1 = db.collection('admins').find({"Aemail":{$gte: email}});
-  cursor1.toArray(function(err1, results1){
-    if(err1)
-    return console.log(err1);
-    console.log("got these filtered results:")
-    console.log(results1);
+  var admEmail = req.query.admEmail;
+  var admPass = req.query.admPass;
+
+  console.log("AdmEmail" + admEmail);
+
+  var cursor1 = db.collection('admins').findOne({'Aemail': admEmail},
+  function(err, account){
+    if (err !== null) {
+      console.error(err);
+      return 1;
+    }
+    console.log("Found " + JSON.stringify(account));
+    if (account !== null) {
+      if (admEmail == account.Aemail && admPass == account.Apassword) {
+        res.redirect('/admin');
+      }
+      else {
+        res.redirect('/adminLogin');
+      }
+    }
   });
-  console.log(temp);
-  //if user/password combo found, redirect to admins.
-  //res.redirect('/admins')
+
 });
 
 app.get('/about', (req, res) => {
