@@ -34,7 +34,8 @@
 	<div class="header">
 	<section id="header" class="appear">
 
-		<div class="navbar navbar-fixed-top" role="navigation" data-0="line-height:100px; height:80px; background-color:rgba(0,0,0,1);" data-300="line-height:60px; height:60px; background-color:rgba(0,0,0,1);">
+		<div class="navbar navbar-fixed-top" role="navigation" data-0="line-height:100px; height:100
+  px; background-color:rgba(0,0,0,1);" data-300="line-height:60px; height:60px; background-color:rgba(0,0,0,1);">
 
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -65,21 +66,20 @@
                     <h3 class="panel-title">Admin Login</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
-                        <fieldset>
+                    <form role="form" id="verifyForm" action="/verifyAdmin" method="GET">
+
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input class="form-control" placeholder="E-mail" id= "admEmail" name="admEmail" type="email" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input id= "admPass" class="form-control" placeholder="Password" name="admPass" type="password" value="">
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <button type="button" id="aLogin" type="submit" class="btn btn-success btn-block">Login</button>
+                            <div class="text-center"><button id="loginSubmit" type="submit" class="line-btn green">Login</button></div>
+                            <p>New Member? Request Access.<a href="/register" class="">Sign up</a></p>
+                        </form>
 
-													  <p>New Member? Request Access.<a href="/register" class="">Sign up</a></p>
 
-                        </fieldset>
-                    </form>
                 </div>
             </div>
         </div>
