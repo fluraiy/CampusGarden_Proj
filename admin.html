@@ -67,9 +67,10 @@
           </div>
         </div>
       </div>
-      <button
+    <!--<button -->
     <div>
-      <a href="/shifts" class="line-btn green">Create New Shift</a>
+      <button type="button" class="line-btn green" onclick="shiftPage()">Create New Shift</button>
+      <!--<a href="/shifts" class="line-btn green" onclick="shiftPage()">Create New Shift</a> -->
     </div>
   </section>
 
@@ -134,6 +135,12 @@
 		</div>
 	</section>
 	<a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>
+
+  <script>
+    function shiftPage(){
+      window.location = "/shifts"
+    }
+  </script>
 
 	<script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script src="js/jquery.js"></script>
